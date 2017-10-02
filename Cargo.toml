@@ -1,0 +1,9 @@
+[package]
+name = "cpur"
+version = "0.1.0"
+authors = ["jmacIndy <jeff.mcginley.indy@gmail.com>"]
+
+[lib]
+name = "cpu"
+
+[dependencies]
