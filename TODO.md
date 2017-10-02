@@ -1,8 +1,6 @@
 # TODO
 * Complete rewrite in Rust
 * Still to convert:
-   * stack class
-   * heap class
    * ops class
    * bios class
    * put pushState and popState in cpu class

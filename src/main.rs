@@ -1,11 +1,15 @@
 mod memory;
 mod cpu;
+mod heap;
+mod stack;
 
 use std::io::prelude::*;
 use std::io;
 
 use memory::Memory;
 use cpu::Cpu;
+use heap::Heap;
+use stack::Stack;
 
 fn display_menu() -> char {
 
@@ -35,16 +39,6 @@ fn display_menu() -> char {
     input.chars().nth(0).unwrap()
 }
 
-fn dump_heap() {
-
-    println!("in dump_heap");
-}
-
-fn dump_stack() {
-
-    println!("in dump_stack");
-}
-
 fn run_cpu() {
 
     println!("in run_cpu");
@@ -59,18 +53,22 @@ fn main() {
 
     let mut memory = Memory::new();
     let mut cpu = Cpu::new();
+    let mut heap = Heap::new();
+    let mut stack = Stack::new();
 
     println!("=========================");
     println!("=== Welcome to my CPU ===");
     println!("=========================");
 
-    memory.initialize();
-
     memory.write(0, 0x01);
     memory.write(10, 0x03);
+    println!("Value at Memory 0 = {:2X}", memory.read(0));
+    println!("Value at Memory 10 = {:2X}", memory.read(10));
 
-    println!("Value at 0 = {}", memory.read(0));
-    println!("Value at 10 = {}", memory.read(10));
+    heap.write(5, 0x0D);
+    heap.write(12, 0x39);
+    println!("Value at Heap 5 = {:2X}", heap.read(5));
+    println!("Value at Heap 12 = {:2X}", heap.read(12));
 
     cpu.increment_program_counter();
     
@@ -80,8 +78,8 @@ fn main() {
             '2' => memory.initialize(),
             '3' => cpu.dump(),
             '4' => memory.dump(),
-            '5' => dump_heap(),
-            '6' => dump_stack(),
+            '5' => heap.dump(),
+            '6' => stack.dump(),
             '7' => run_cpu(),
             '8' => load_program(),
             'X' | 'x' => break,
