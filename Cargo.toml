@@ -2,6 +2,11 @@
 name = "cpur"
 version = "0.1.0"
 authors = ["jmacIndy <jeff.mcginley.indy@gmail.com>"]
+description = "Virtual CPU project using Rust"
+readme = "README.md"
+keywords = ["virtual", "CPU", "rust"]
+categories = ["emulators", "simulation", "parsing"]
+license-file = "LICENSE.md"
 
 [lib]
 name = "cpu"
