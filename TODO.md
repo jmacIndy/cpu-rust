@@ -1,14 +1,14 @@
 # TODO
 * Complete rewrite in Rust
 * Still to convert:
-   * ops class
-   * bios class
-   * put pushState and popState in cpu class
+   * ops module 
+   * bios module
    * write assembler
 * Figure out:
   * handle overflows and underflows
   * handle signing
   * print function should use interrupts
+  * add boundary checks
 * Add capability to create and print strings
 * allow LOADs and SETs to specify register, instead of 4 ops
 * merge LOADs and SETs to reduce ops

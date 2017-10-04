@@ -2,6 +2,7 @@ mod memory;
 mod cpu;
 mod heap;
 mod stack;
+mod ops;
 
 use std::io::prelude::*;
 use std::io;
@@ -70,8 +71,27 @@ fn main() {
     println!("Value at Heap 5 = {:2X}", heap.read(5));
     println!("Value at Heap 12 = {:2X}", heap.read(12));
 
+    stack.push(0x07);
+    println!("Value on Stack = {:2X}", stack.pop());
+    stack.push(0x08);
+
     cpu.increment_program_counter();
-    
+
+    cpu.push_state(&mut stack);
+
+    cpu.pop_state(&mut stack);
+
+    memory.write(0x01, 0x01);
+    memory.write(0x02, 0x05);
+    memory.write(0x03, 0x02);
+    memory.write(0x04, 0x03);
+    memory.write(0x05, 0x03);
+    memory.write(0x06, 0x04);
+    memory.write(0x07, 0x00);
+    memory.write(0x08, 0x05);
+    memory.write(0x09, 0x00);
+    memory.write(0x0A, 0x00);
+
     loop {
         match display_menu() {
             '1' => cpu.initialize(),
@@ -80,7 +100,7 @@ fn main() {
             '4' => memory.dump(),
             '5' => heap.dump(),
             '6' => stack.dump(),
-            '7' => run_cpu(),
+            '7' => ops::run(&mut cpu, &mut memory, &mut heap, &mut stack),
             '8' => load_program(),
             'X' | 'x' => break,
             _ => println!("ERROR: Bad selection! Try again!"),
